@@ -54,7 +54,7 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
             z-index: 100;
             width: 140px;
-            height: 90px;
+            height: 60px;
             text-align: center;
             font-size: 0.9rem;
             animation: float 4s ease-in-out infinite;
@@ -64,7 +64,7 @@
         }
         
         .popup-content {
-            font-size: 1.5rem;
+            font-size: 0.85rem;
             margin-bottom: 0.5rem;
         }
         
@@ -96,7 +96,7 @@
         let isOpening = false;
         let isGridComplete = false;
         const popupWidth = 140; // 弹窗宽度
-        const popupHeight = 90; // 弹窗高度
+        const popupHeight = 60; // 弹窗高度
         const columnsPerRow = 3; // 一排3个弹窗
         const gridPopups = new Set(); // 存储"铺满屏幕的弹窗"，用于标记不消失
         const backgroundMusic = document.getElementById('backgroundMusic');
