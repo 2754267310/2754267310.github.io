@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>神秘的礼物</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- 新增：引入音频兼容性polyfill，解决X浏览器等小众浏览器格式支持问题（摘要5） -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-audio-element-polyfill/1.2.0/html5-audio-element-polyfill.min.js"></script>
 </head>
 <body class="bg-black overflow-hidden h-screen flex items-center justify-center">
@@ -29,10 +28,9 @@
             <div class="text-white text-4xl">🎁</div>
         </div>
     </div>
-    <!-- 核心修改1：新增crossorigin="anonymous"解决跨域（摘要1、2、6）；保留单个标准MP3源，避免格式混淆 -->
-    <!-- 核心修改2：preload="metadata"改为preload="auto"，让X浏览器提前加载音频 -->
+    <!-- 修改音频路径，指向你服务器上的实际文件名 -->
     <audio id="backgroundMusic" loop preload="auto" crossorigin="anonymous">
-        <source src="https://pdf1.webgetstore.com/2025/11/02/b315ba2cab36adb4264459ec5be7748b.mp3?sg=b320d5f543e542945516307f38124ceb&e=69074f2b&fileName=1762085910161.mp3&fi=260313323" type="audio/mpeg">
+        <source src="1762085910161.mp3" type="audio/mpeg">
         您的浏览器暂不支持该音频格式
      </audio>
     <style>
@@ -103,14 +101,14 @@
         const gridPopups = new Set(); // 存储"铺满屏幕的弹窗"，用于标记不消失
         const backgroundMusic = document.getElementById('backgroundMusic');
 
-        // 核心修改3：页面加载后先绑定"全局首次点击"事件（摘要6），确保X浏览器识别为用户主动操作
+        // 页面加载后先绑定"全局首次点击"事件，确保浏览器识别为用户主动操作
         let hasUserInteracted = false;
         document.addEventListener('click', initAudioOnFirstClick, { once: true });
         
         // 首次点击初始化音频播放权限
         function initAudioOnFirstClick() {
             hasUserInteracted = true;
-            // 触发一次空播放，让X浏览器提前获取播放权限（避免后续点击拦截）
+            // 触发一次空播放，让浏览器提前获取播放权限
             backgroundMusic.play().catch(() => {});
         }
         
@@ -119,7 +117,7 @@
             if (isOpening) return;
             isOpening = true;
             
-            // 核心修改4：确保已获取用户交互权限后再播放（避免X浏览器拦截）
+            // 确保已获取用户交互权限后再播放
             if (hasUserInteracted) {
                 playAudio();
             } else {
@@ -154,13 +152,13 @@
         function playAudio() {
             backgroundMusic.play().catch(error => {
                 console.log("音频播放错误:", error);
-                // 核心修改5：针对X浏览器的兜底提示（摘要2、3），指导用户排查网络/跨域
-                alert("音频加载失败，请检查：1. 网络是否正常 2. 若使用公司/校园网络，尝试切换手机热点");
+                // 兜底提示
+                alert("音频加载失败，请检查网络连接是否正常。");
                 isOpening = false;
             });
         }
         
-        // 按行创建弹窗（逻辑不变）
+        // 按行创建弹窗
         function createGridPopups() {
             const totalRows = Math.ceil(window.innerHeight / popupHeight);
             const totalColumns = columnsPerRow;
@@ -197,7 +195,7 @@
             }
         }
         
-        // 开始随机弹窗（逻辑不变）
+        // 开始随机弹窗
         function startRandomPopups() {
             for (let i = 0; i < 10; i++) {
                 setTimeout(createRandomPopup, i * 100);
@@ -205,7 +203,7 @@
             setInterval(createRandomPopup, 200);
         }
         
-        // 生成随机位置弹窗（逻辑不变）
+        // 生成随机位置弹窗
         function createRandomPopup() {
             if (!isGridComplete) return;
             
