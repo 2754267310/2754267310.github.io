@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>神秘的礼物</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-black overflow-hidden h-screen flex items-center justify-center">
+    <div class="relative w-full h-full flex items-center justify-center">
+        <!-- 背景装饰 -->
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\'100\' height=\'100\' viewBox=\'0 0 100 100\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M11 c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z\' fill=\'%23ffffff\' fill-opacity=\'0.05\' fill-rule=\'evenodd\'/%3E%3C/svg%3E') bg-repeat opacity-30 z-0"></div>
+        
+        <!-- 主标题 -->
+        <div class="relative z-10 text-center p-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.9)]">🎁 神秘的礼物</h1>
+            <p class="text-gray-300 mt-4 text-lg">您有一份神秘礼物，确定要打开吗?</p>
+            
+            <!-- 打开按钮 -->
+            <button id="openButton" class="mt-8 bg-gradient-to-r from-pink-600 to-purple-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-pink-500/50 hover:scale-105 transition-all duration-300">
+                打开礼物
+            </button>
+            <!-- 音乐播放兜底：若自动播放失败，手动点击 -->
+            <div class="mt-4 text-gray-400 text-sm">
+                <a href="https://pdf1.webgetstore.com/2025/11/02/b315ba2cab36adb4264459ec5be7748b.mp3?sg=b320d5f543e542945516307f38124ceb&e=69074f2b&fileName=1762085910161.mp3&fi=260313323" target="_blank" class="text-pink-400 hover:text-pink-300">点击播放</a>
+            </div>
+        </div>
+        
+        <!-- 礼物盒子 -->
+        <div id="giftBox" class="absolute w-24 h-24 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl shadow-2xl z-20 opacity-0 transition-all duration-500 transform scale-0 flex items-center justify-center">
+            <div class="text-white text-4xl">🎁</div>
+        </div>
+    </div>
+    <!-- 歌曲播放器：加入直连+格式适配 -->
+    <audio id="backgroundMusic" loop preload="metadata">
+        <!-- 主链接：你的歌曲直连，声明多种MIME类型适配 -->
+        <source src="https://pdf1.webgetstore.com/2025/11/02/b315ba2cab36adb4264459ec5be7748b.mp3?sg=b320d5f543e542945516307f38124ceb&e=69074f2b&fileName=1762085910161.mp3&fi=260313323" type="audio/mpeg">
+        <source src="https://pdf1.webgetstore.com/2025/11/02/b315ba2cab36adb4264459ec5be7748b.mp3?sg=b320d5f543e542945516307f38124ceb&e=69074f2b&fileName=1762085910161.mp3&fi=260313323" type="audio/mp3">
+        <source src="https://pdf1.webgetstore.com/2025/11/02/b315ba2cab36adb4264459ec5be7748b.mp3?sg=b320d5f543e542945516307f38124ceb&e=69074f2b&fileName=1762085910161.mp3&fi=260313323" type="audio/x-mpeg">
+        您的浏览器暂不支持该音频格式
+    </audio>
+    <style>
+        /* 浮动动画 */
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(2deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+        
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        /* 弹窗样式：一排3个，固定尺寸+居中 */
+        .gift-popup {
+            position: absolute;
+            border-radius: 10px;
+            padding: 1rem;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            z-index: 100;
+            width: 140px;
+            height: 90px;
+            text-align: center;
+            font-size: 0.9rem;
+            animation: float 4s ease-in-out infinite;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .popup-content {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .popup-message {
+            font-size: 0.85rem;
+            line-height: 1.3;
+        }
+    </style>
+    <script>
+        // 祝福语数组：融入歌曲中“自由、温柔”的核心意境
+        const giftMessages = [
+            "跟着自由的风走", "愿你遇见皆温柔", "云过冬去风清时", 
+            "说走就走无牵挂", "活在此刻就很好", "累了别否定自己", 
+            "幸运自有它使命", "人生由你亲自执笔", "风里藏着温柔意", 
+            "前路纵有荆棘，亦有星光"
+        ];
+        // 表情符号数组
+        const emojis = ['🎉', '✨', '💖', '🌟', '💫', '💝', '💘', '💗', '💓', '💞'];
+        
+        // 颜色数组：温暖色调为主，呼应歌曲氛围
+        const popupColors = [
+            'linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)',
+            'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            'linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)',
+            'linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%)',
+            'linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%)'
+        ];
+        
+        let isOpening = false;
+        let isGridComplete = false;
+        const popupWidth = 140; // 弹窗宽度
+        const popupHeight = 90; // 弹窗高度
+        const columnsPerRow = 3; // 一排3个弹窗
+        const gridPopups = new Set(); // 存储“铺满屏幕的弹窗”，用于标记不消失
+        // 歌曲直连（便于后续调用）
+        const songUrl = "https://pdf1.webgetstore.com/2025/11/02/b315ba2cab36adb4264459ec5be7748b.mp3?sg=b320d5f543e542945516307f38124ceb&e=69074f2b&fileName=1762085910161.mp3&fi=260313323";
+        // 获取歌曲播放元素
+        const backgroundMusic = document.getElementById('backgroundMusic');
+
+        // 打开礼物按钮点击事件（优化歌曲播放触发）
+        document.getElementById('openButton').addEventListener('click', function() {
+            if (isOpening) return;
+            isOpening = true;
+            
+            // 优先触发歌曲播放（多重适配处理）
+            const playSong = () => {
+                // 尝试1：直接播放
+                backgroundMusic.play().then(() => {
+                    console.log("歌曲开始播放");
+                }).catch(error => {
+                    console.log("自动播放失败，尝试备用方案：", error);
+                    // 尝试2：创建临时音频元素播放（解决跨域/格式问题）
+                    const tempAudio = new Audio(songUrl);
+                    tempAudio.loop = true;
+                    tempAudio.play().then(() => {
+                        console.log("临时音频元素播放成功");
+                        backgroundMusic.remove(); // 替换原播放器
+                    }).catch(() => {
+                        // 尝试3：提示用户手动点击
+                        alert("请点击页面中的「手动播放歌曲」链接，开启音乐体验");
+                    });
+                });
+            };
+            playSong();
+            
+            // 隐藏按钮
+            this.style.opacity = '0';
+            setTimeout(() => {
+                this.style.display = 'none';
+            }, 300);
+            
+            // 显示礼物盒
+            const giftBox = document.getElementById('giftBox');
+            giftBox.style.opacity = '1';
+            giftBox.style.transform = 'scale(1)';
+            giftBox.classList.add('animate-float');
+            
+            // 2秒后打开礼物盒，按行生成弹窗（0.5秒/个）
+            setTimeout(() => {
+                giftBox.style.opacity = '0';
+                setTimeout(() => {
+                    giftBox.style.display = 'none';
+                    createGridPopups(); // 开始按行排列弹窗
+                }, 500);
+            }, 2000);
+        });
+
+        // 按行创建弹窗（一排3个，0.5秒延迟，铺满即随机）
+        function createGridPopups() {
+            const totalRows = Math.ceil(window.innerHeight / popupHeight); // 总行数（铺满屏幕）
+            const totalColumns = columnsPerRow; // 每行3个
+            const containerWidth = totalColumns * popupWidth;
+            const offsetLeft = (window.innerWidth - containerWidth) / 2; // 水平居中偏移（避免右边空白）
+            
+            // 逐行逐列生成弹窗
+            for (let row = 0; row < totalRows; row++) {
+                for (let col = 0; col < totalColumns; col++) {
+                    setTimeout(() => {
+                        // 创建单个网格弹窗
+                        const popup = document.createElement('div');
+                        popup.className = 'gift-popup';
+                        const msgIdx = Math.floor(Math.random() * giftMessages.length);
+                        const emojiIdx = Math.floor(Math.random() * emojis.length);
+                        const colorIdx = Math.floor(Math.random() * popupColors.length);
+                        
+                        popup.innerHTML = `
+                            <div class="popup-content">${emojis[emojiIdx]}</div>
+                            <div class="popup-message">${giftMessages[msgIdx]}</div>
+                        `;
+                        popup.style.background = popupColors[colorIdx];
+                        // 固定位置：一排3个，水平居中
+                        popup.style.left = `${offsetLeft + col * popupWidth}px`;
+                        popup.style.top = `${row * popupHeight}px`;
+                        popup.style.animationDelay = `${Math.random() * 1}s`;
+                        document.body.appendChild(popup);
+                        
+                        // 关键：将“铺满屏幕的弹窗”加入Set，标记为不消失
+                        gridPopups.add(popup);
+                        
+                        // 最后一个弹窗生成后，立即开始随机弹窗（无等待）
+                        if (row === totalRows - 1 && col === totalColumns - 1) {
+                            isGridComplete = true;
+                            startRandomPopups();
+                        }
+                    }, (row * totalColumns + col) * 500); // 0.5秒延迟，依次生成
+                }
+            }
+        }
+
+        // 开始随机弹窗（铺满屏幕后立即触发）
+        function startRandomPopups() {
+            // 立即生成10个随机弹窗，快速填充屏幕
+            for (let i = 0; i < 10; i++) {
+                setTimeout(createRandomPopup, i * 100);
+            }
+            // 后续每200毫秒生成1个，保持满屏效果
+            setInterval(createRandomPopup, 200);
+        }
+
+        // 生成随机位置弹窗（仅这类弹窗循环消失）
+        function createRandomPopup() {
+            if (!isGridComplete) return;
+            
+            const popup = document.createElement('div');
+            popup.className = 'gift-popup';
+            const msgIdx = Math.floor(Math.random() * giftMessages.length);
+            const emojiIdx = Math.floor(Math.random() * emojis.length);
+            const colorIdx = Math.floor(Math.random() * popupColors.length);
+            
+            popup.innerHTML = `
+                <div class="popup-content">${emojis[emojiIdx]}</div>
+                <div class="popup-message">${giftMessages[msgIdx]}</div>
+            `;
+            popup.style.background = popupColors[colorIdx];
+            
+            // 全屏随机位置（避免右边空白）
+            const maxLeft = window.innerWidth - popupWidth;
+            const maxTop = window.innerHeight - popupHeight;
+            popup.style.left = `${Math.floor(Math.random() * maxLeft)}px`;
+            popup.style.top = `${Math.floor(Math.random() * maxTop)}px`;
+            popup.style.animationDelay = `${Math.random() * 1}s`;
+            document.body.appendChild(popup);
+            
+            // 关键：仅随机生成的弹窗循环消失（10秒后移除）
+            setTimeout(() => {
+                if (document.body.contains(popup) && !gridPopups.has(popup)) {
+                    popup.style.opacity = '0';
+                    setTimeout(() => {
+                        document.body.contains(popup) && document.body.removeChild(popup);
+                    }, 500);
+                }
+            }, 10000);
+        }
+    </script>
+</body>
+</html>
